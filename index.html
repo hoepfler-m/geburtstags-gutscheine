@@ -166,7 +166,7 @@
     }
 
     .voucher.open {
-      max-height: 500px; /* Groß genug für längeren Inhalt */
+      max-height: 500px;
       overflow: visible;
     }
 
@@ -175,6 +175,8 @@
       color: #C0C0C0;
       font-size: 1.6rem;
       margin-bottom: 10px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .voucher-front p {
@@ -184,7 +186,7 @@
     .voucher-back {
       display: none;
       margin-top: 15px;
-      padding: 10px;
+      padding: 15px;
     }
 
     .voucher.open .voucher-back {
@@ -194,8 +196,10 @@
     .voucher-back h3 {
       font-family: 'Cinzel', serif;
       color: #C0C0C0;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       margin-bottom: 10px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .voucher-back p {
@@ -298,7 +302,7 @@
       font-size: 1.1rem;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 20px;
+      margin: 20px 0;
       transition: background 0.3s;
     }
 
@@ -353,6 +357,51 @@
       z-index: 1000;
     }
 
+    #puzzleContainer {
+      max-width: 300px;
+      margin: 20px auto;
+    }
+
+    #puzzleBoard {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #C0C0C0;
+      border-radius: 8px;
+    }
+
+    .puzzle-piece {
+      width: 150px;
+      height: 150px;
+      background-size: 300px 300px;
+      cursor: move;
+      border: 1px solid #C0C0C0;
+    }
+
+    #puzzleMessage {
+      font-size: 1rem;
+      color: #C0C0C0;
+      margin-top: 10px;
+    }
+
+    #resetPuzzle {
+      background: #8B0000;
+      color: white;
+      border: 2px solid #C0C0C0;
+      padding: 8px 15px;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #resetPuzzle:hover {
+      background: #A52A2A;
+    }
+
     .heart {
       position: absolute;
       width: 18px;
@@ -404,10 +453,13 @@
         max-height: 100px;
       }
       .voucher.open {
-        max-height: none; /* Dynamische Höhe */
+        max-height: none;
       }
-      .voucher-front h2, .voucher-back h3 {
+      .voucher-front h2 {
         font-size: 1.4rem;
+      }
+      .voucher-back h3 {
+        font-size: 1.2rem;
       }
       .voucher-front p, .voucher-back p {
         font-size: 0.85rem;
@@ -462,6 +514,18 @@
       }
       .love-ticker span {
         font-size: 0.9rem;
+      }
+      #puzzleContainer {
+        max-width: 200px;
+      }
+      #puzzleBoard {
+        width: 200px;
+        height: 200px;
+      }
+      .puzzle-piece {
+        width: 100px;
+        height: 100px;
+        background-size: 200px 200px;
       }
     }
 
@@ -723,6 +787,13 @@ Ich denke an all die kleinen Momente, die uns verbinden – wie wir zusammen gel
 In Liebe, für immer dein,
 [Dein Name]</p>
         <button onclick="closeLoveLetter()">Schließen</button>
+      </div>
+      <div id="puzzleContainer">
+        <h2>Herz-Puzzle</h2>
+        <p>Setze das Herz zusammen, um eine besondere Nachricht zu sehen!</p>
+        <div id="puzzleBoard"></div>
+        <p id="puzzleMessage"></p>
+        <button id="resetPuzzle">Puzzle zurücksetzen</button>
       </div>
     </section>
     <section id="our-story" class="section hidden">
@@ -1002,6 +1073,159 @@ In Liebe, für immer dein,
 
       result.textContent = message;
     }
+
+    // Herz-Puzzle
+    const puzzleContainer = document.getElementById('puzzleContainer');
+    const puzzleBoard = document.getElementById('puzzleBoard');
+    const puzzleMessage = document.getElementById('puzzleMessage');
+    const resetPuzzleButton = document.getElementById('resetPuzzle');
+    const puzzleSize = window.innerWidth <= 768 ? 200 : 300;
+    const pieceSize = puzzleSize / 2;
+    let pieces = [];
+    let isDragging = false;
+    let currentPiece = null;
+
+    function initPuzzle() {
+      puzzleBoard.innerHTML = '';
+      pieces = [
+        { id: 0, correctPos: 0, currentPos: 0, x: 0, y: 0 },
+        { id: 1, correctPos: 1, currentPos: 1, x: pieceSize, y: 0 },
+        { id: 2, correctPos: 2, currentPos: 2, x: 0, y: pieceSize },
+        { id: 3, correctPos: 3, currentPos: 3, x: pieceSize, y: pieceSize }
+      ];
+      // Mische die Puzzleteile
+      for (let i = pieces.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pieces[i].currentPos, pieces[j].currentPos] = [pieces[j].currentPos, pieces[i].currentPos];
+      }
+      pieces.forEach(piece => {
+        const div = document.createElement('div');
+        div.classList.add('puzzle-piece');
+        div.dataset.id = piece.id;
+        const pos = pieces.find(p => p.currentPos === piece.id);
+        div.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="red"/><text x="150" y="150" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">Ich liebe dich</text></svg>')`;
+        div.style.backgroundPosition = `-${pos.x}px -${pos.y}px`;
+        div.style.left = `${piece.currentPos % 2 * pieceSize}px`;
+        div.style.top = `${Math.floor(piece.currentPos / 2) * pieceSize}px`;
+        puzzleBoard.appendChild(div);
+
+        // Drag-and-Drop für Desktop
+        div.addEventListener('mousedown', startDrag);
+        div.addEventListener('touchstart', startTouch);
+
+        // Klick-Interaktion für Mobilgeräte
+        div.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            const emptyPos = pieces.find(p => p.currentPos === pieces.length - 1);
+            if (Math.abs(piece.currentPos - emptyPos.currentPos) === 1 || Math.abs(piece.currentPos - emptyPos.currentPos) === 2) {
+              [piece.currentPos, emptyPos.currentPos] = [emptyPos.currentPos, piece.currentPos];
+              updatePuzzle();
+            }
+          }
+        });
+      });
+      puzzleMessage.textContent = 'Ziehe die Teile, um das Herz zu sehen!';
+    }
+
+    function startDrag(e) {
+      if (window.innerWidth > 768) {
+        isDragging = true;
+        currentPiece = e.target;
+        e.target.style.zIndex = 10;
+      }
+    }
+
+    function startTouch(e) {
+      if (window.innerWidth <= 768) return;
+      isDragging = true;
+      currentPiece = e.target;
+      e.target.style.zIndex = 10;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const rect = puzzleBoard.getBoundingClientRect();
+        const x = e.clientX - rect.left - pieceSize / 2;
+        const y = e.clientY - rect.top - pieceSize / 2;
+        currentPiece.style.left = `${x}px`;
+        currentPiece.style.top = `${y}px`;
+      }
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (isDragging) {
+        const rect = puzzleBoard.getBoundingClientRect();
+        const touch = e.touches[0];
+        const x = touch.clientX - rect.left - pieceSize / 2;
+        const y = touch.clientY - rect.top - pieceSize / 2;
+        currentPiece.style.left = `${x}px`;
+        currentPiece.style.top = `${y}px`;
+      }
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (isDragging) {
+        isDragging = false;
+        const rect = puzzleBoard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const targetPos = Math.floor(y / pieceSize) * 2 + Math.floor(x / pieceSize);
+        const currentPieceData = pieces.find(p => p.id == currentPiece.dataset.id);
+        const targetPiece = pieces.find(p => p.currentPos === targetPos);
+        if (targetPiece) {
+          [currentPieceData.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, currentPieceData.currentPos];
+        }
+        currentPiece.style.zIndex = 0;
+        updatePuzzle();
+      }
+    });
+
+    document.addEventListener('touchend', (e) => {
+      if (isDragging) {
+        isDragging = false;
+        const rect = puzzleBoard.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        const targetPos = Math.floor(y / pieceSize) * 2 + Math.floor(x / pieceSize);
+        const currentPieceData = pieces.find(p => p.id == currentPiece.dataset.id);
+        const targetPiece = pieces.find(p => p.currentPos === targetPos);
+        if (targetPiece) {
+          [currentPieceData.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, currentPieceData.currentPos];
+        }
+        currentPiece.style.zIndex = 0;
+        updatePuzzle();
+      }
+    });
+
+    function updatePuzzle() {
+      const piecesElements = document.querySelectorAll('.puzzle-piece');
+      piecesElements.forEach(piece => {
+        const pieceData = pieces.find(p => p.id == piece.dataset.id);
+        piece.style.left = `${pieceData.currentPos % 2 * pieceSize}px`;
+        piece.style.top = `${Math.floor(pieceData.currentPos / 2) * pieceSize}px`;
+        piece.style.transition = 'all 0.3s ease';
+      });
+      setTimeout(() => {
+        piecesElements.forEach(piece => piece.style.transition = '');
+      }, 300);
+      checkPuzzle();
+    }
+
+    function checkPuzzle() {
+      const isSolved = pieces.every(piece => piece.currentPos === piece.correctPos);
+      if (isSolved) {
+        puzzleMessage.textContent = 'Ich liebe dich für immer! ❤️';
+        triggerConfetti();
+        triggerHearts(10);
+      } else {
+        puzzleMessage.textContent = 'Setze das Herz zusammen, um die Nachricht zu sehen!';
+      }
+    }
+
+    resetPuzzleButton.addEventListener('click', initPuzzle);
+
+    initPuzzle();
   </script>
 </body>
 </html>
