@@ -476,69 +476,7 @@
       backdrop-filter: blur(5px);
     }
 
-    #puzzleContainer {
-      max-width: 300px;
-      margin: 20px auto;
-    }
 
-    #puzzleBoard {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      width: 300px;
-      height: 300px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid var(--accent-silver);
-      border-radius: var(--border-radius);
-      margin: 0 auto;
-    }
-
-    .puzzle-piece {
-      width: 150px;
-      height: 150px;
-      background-size: 300px 300px;
-      cursor: move;
-      border: 1px solid var(--accent-silver);
-      transition: transform 0.1s ease;
-      position: relative;
-    }
-
-    .puzzle-piece:hover {
-      transform: scale(1.02);
-      z-index: 5;
-    }
-
-    .puzzle-piece:focus {
-      outline: 3px solid var(--accent-silver);
-      outline-offset: 2px;
-    }
-
-    #puzzleMessage {
-      font-size: 1rem;
-      color: var(--accent-silver);
-      margin-top: 10px;
-      font-weight: 600;
-    }
-
-    #resetPuzzle {
-      background: var(--primary-red);
-      color: white;
-      border: 2px solid var(--accent-silver);
-      padding: 12px 15px;
-      font-size: 0.95rem;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      margin-top: 10px;
-      min-height: 44px;
-      transition: all var(--transition-fast);
-    }
-
-    #resetPuzzle:hover,
-    #resetPuzzle:focus {
-      background: var(--hover-red);
-      outline: 2px solid var(--accent-silver);
-      outline-offset: 2px;
-    }
 
     .heart {
       position: absolute;
@@ -661,18 +599,7 @@
       .love-ticker span {
         font-size: 0.9rem;
       }
-      #puzzleContainer {
-        max-width: 200px;
-      }
-      #puzzleBoard {
-        width: 200px;
-        height: 200px;
-      }
-      .puzzle-piece {
-        width: 100px;
-        height: 100px;
-        background-size: 200px 200px;
-      }
+
     }
 
     @media (max-width: 480px) {
@@ -717,7 +644,7 @@
       <section id="home" aria-labelledby="home-heading">
         <header>
           <h1 id="home-heading">Alles Gute zum Geburtstag, mein Liebling! 🎉</h1>
-          <p>Das hier ist mein Geschenk für dich – ein Zeichen meiner Liebe und meines Versprechens, immer für dich da zu sein. Öffne die Gutscheine und lass dich überraschen!</p>
+          <p>Das hier ist mein Geschenk für dich, ein Zeichen meiner Liebe und meines Versprechens, immer für dich da zu sein. Öffne die Gutscheine und lass dich überraschen!</p>
         </header>
         
         <div class="controls" role="group" aria-label="Interaktive Steuerelemente">
@@ -965,26 +892,20 @@
           <h2 id="letter-heading">Mein Liebling,</h2>
           <div id="letterText">
             <p>Mein Schatz,</p>
-            <p>Du bist der wichtigste Mensch in meinem Leben, mein Licht in dunklen Zeiten und mein Grund, jeden Tag besser zu sein. Ich weiß, dass ich in der Vergangenheit Fehler gemacht habe – manchmal war ich egoistisch, bin im Streit gegangen und habe dich allein gelassen. Das tut mir unendlich leid, und ich verspreche dir von Herzen, dass ich daran arbeite, der Partner zu sein, den du verdienst. Nie wieder werde ich weglaufen, nie wieder werde ich dich im Stich lassen. Stattdessen will ich an deiner Seite stehen, dich in den Arm nehmen, dir zuhören und mit dir gemeinsam jedes Hindernis überwinden.</p>
-            <p>Du machst mein Leben so viel bunter und reicher. Dein Lächeln bringt mich zum Strahlen, dein Lachen ist meine liebste Melodie, und deine Nähe gibt mir das Gefühl, zu Hause zu sein. Diese Gutscheine sind kleine Versprechen, die ich dir gebe – für gemeinsame Abenteuer, für ruhige Momente, für Liebe und Respekt. Aber mein größtes Versprechen ist, dass ich immer für dich da sein werde, in guten wie in schweren Zeiten. Ich will mit dir lachen, träumen, reisen und ein Leben aufbauen, das uns beide glücklich macht.</p>
-            <p>Ich denke an all die kleinen Momente, die uns verbinden – wie wir zusammen gelacht haben, wie du mich in den Arm genommen hast, wenn ich es am meisten brauchte, oder wie wir einfach still beieinander saßen und die Welt perfekt war. Ich will mehr solcher Momente schaffen, jeden Tag. Du bist mein Ein und Alles, und ich werde alles tun, um dich glücklich zu machen. Ich liebe dich mehr, als Worte je ausdrücken könnten, und ich freue mich auf eine Zukunft mit dir, voller Liebe, Vertrauen und unvergesslicher Erinnerungen.</p>
-            <p>In Liebe, für immer dein,<br>[Dein Name]</p>
+            <p>Du bist der wichtigste Mensch in meinem Leben, mein Licht in dunklen Zeiten und mein Grund, jeden Tag besser zu sein. Ich weiß, dass ich in der Vergangenheit Fehler gemacht habe, manchmal war ich egoistisch, bin im Streit gegangen und habe dich allein gelassen. Das tut mir unendlich leid, und ich verspreche dir von Herzen, dass ich daran arbeite, der Partner zu sein, den du verdienst. Nie wieder werde ich weglaufen, nie wieder werde ich dich im Stich lassen. Stattdessen will ich an deiner Seite stehen, dich in den Arm nehmen, dir zuhören und mit dir gemeinsam jedes Hindernis überwinden.</p>
+            <p>Du machst mein Leben so viel bunter und reicher. Dein Lächeln bringt mich zum Strahlen, dein Lachen ist meine liebste Melodie, und deine Nähe gibt mir das Gefühl, zu Hause zu sein. Diese Gutscheine sind kleine Versprechen, die ich dir gebe, für gemeinsame Abenteuer, für ruhige Momente, für Liebe und Respekt. Aber mein größtes Versprechen ist, dass ich immer für dich da sein werde, in guten wie in schweren Zeiten. Ich will mit dir lachen, träumen, reisen und ein Leben aufbauen, das uns beide glücklich macht.</p>
+            <p>Ich denke an all die kleinen Momente, die uns verbinden, wie wir zusammen gelacht haben, wie du mich in den Arm genommen hast, wenn ich es am meisten brauchte, oder wie wir einfach still beieinander saßen und die Welt perfekt war. Ich will mehr solcher Momente schaffen, jeden Tag. Du bist mein Ein und Alles, und ich werde alles tun, um dich glücklich zu machen. Ich liebe dich mehr, als Worte je ausdrücken könnten, und ich freue mich auf eine Zukunft mit dir, voller Liebe, Vertrauen und unvergesslicher Erinnerungen.</p>
+            <p>In Liebe, für immer dein,<br>Dein Schatz</p>
           </div>
           <button type="button" onclick="closeLoveLetter()" aria-label="Liebesbrief schließen">Schließen</button>
         </div>
         
-        <section id="puzzleContainer" aria-labelledby="puzzle-heading">
-          <h2 id="puzzle-heading">Herz-Puzzle</h2>
-          <p>Setze das Herz zusammen, um eine besondere Nachricht zu sehen!</p>
-          <div id="puzzleBoard" role="application" aria-label="Interaktives Puzzle-Spiel"></div>
-          <p id="puzzleMessage" aria-live="polite">Ziehe die Teile, um das Herz zu sehen!</p>
-          <button type="button" id="resetPuzzle">Puzzle zurücksetzen</button>
-        </section>
+
       </section>
       
       <section id="our-story" class="section hidden" aria-labelledby="story-heading">
         <h2 id="story-heading">Unsere Geschichte</h2>
-        <p>Hier könnte die Geschichte eurer Beziehung stehen – vom ersten Treffen bis zu den wichtigsten Momenten. Zum Beispiel: „Wir trafen uns an einem verregneten Tag, und seitdem ist jeder Tag mit dir wie Sonnenschein."</p>
+        <p>Hier könnte die Geschichte eurer Beziehung stehen, vom ersten Treffen bis zu den wichtigsten Momenten. Zum Beispiel: „Wir trafen uns an einem verregneten Tag, und seitdem ist jeder Tag mit dir wie Sonnenschein."</p>
       </section>
       
       <section id="photo-album" class="section hidden" aria-labelledby="album-heading">
@@ -1410,215 +1331,7 @@
         result.textContent = message;
       };
 
-      // Puzzle functionality with improved accessibility and performance
-      function initPuzzle() {
-        const puzzleContainer = document.getElementById('puzzleContainer');
-        const puzzleBoard = document.getElementById('puzzleBoard');
-        const puzzleMessage = document.getElementById('puzzleMessage');
-        const resetPuzzleButton = document.getElementById('resetPuzzle');
-        const puzzleSize = window.innerWidth <= 768 ? 200 : 300;
-        const pieceSize = puzzleSize / 2;
-        let pieces = [];
-        let isDragging = false;
-        let currentPiece = null;
-        let dragOffset = { x: 0, y: 0 };
 
-        function createPuzzle() {
-          puzzleBoard.innerHTML = '';
-          pieces = [
-            { id: 0, correctPos: 0, currentPos: 0, x: 0, y: 0 },
-            { id: 1, correctPos: 1, currentPos: 1, x: pieceSize, y: 0 },
-            { id: 2, correctPos: 2, currentPos: 2, x: 0, y: pieceSize },
-            { id: 3, correctPos: 3, currentPos: 3, x: pieceSize, y: pieceSize }
-          ];
-          
-          // Shuffle pieces
-          for (let i = pieces.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [pieces[i].currentPos, pieces[j].currentPos] = [pieces[j].currentPos, pieces[i].currentPos];
-          }
-
-          pieces.forEach(piece => {
-            const div = document.createElement('div');
-            div.classList.add('puzzle-piece');
-            div.dataset.id = piece.id;
-            div.setAttribute('tabindex', '0');
-            div.setAttribute('role', 'button');
-            div.setAttribute('aria-label', `Puzzleteil ${piece.id + 1}`);
-            
-            const pos = pieces.find(p => p.currentPos === piece.id);
-            div.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="red"/><text x="150" y="150" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">Ich liebe dich</text></svg>')`;
-            div.style.backgroundPosition = `-${pos.x}px -${pos.y}px`;
-            div.style.left = `${piece.currentPos % 2 * pieceSize}px`;
-            div.style.top = `${Math.floor(piece.currentPos / 2) * pieceSize}px`;
-            puzzleBoard.appendChild(div);
-
-            // Event listeners for drag and drop
-            div.addEventListener('mousedown', startDrag);
-            div.addEventListener('touchstart', startTouch, { passive: false });
-            
-            // Keyboard support
-            div.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleKeyboardMove(piece);
-              }
-            });
-
-            // Mobile tap support
-            if (window.innerWidth <= 768) {
-              div.addEventListener('click', () => handleMobileMove(piece));
-            }
-          });
-          
-          puzzleMessage.textContent = 'Ziehe die Teile, um das Herz zu sehen!';
-        }
-
-        function startDrag(e) {
-          if (window.innerWidth > 768) {
-            isDragging = true;
-            currentPiece = e.target;
-            const rect = currentPiece.getBoundingClientRect();
-            const boardRect = puzzleBoard.getBoundingClientRect();
-            dragOffset.x = e.clientX - rect.left;
-            dragOffset.y = e.clientY - rect.top;
-            currentPiece.style.zIndex = 10;
-            e.preventDefault();
-          }
-        }
-
-        function startTouch(e) {
-          if (window.innerWidth <= 768) return;
-          isDragging = true;
-          currentPiece = e.target;
-          const rect = currentPiece.getBoundingClientRect();
-          const touch = e.touches[0];
-          dragOffset.x = touch.clientX - rect.left;
-          dragOffset.y = touch.clientY - rect.top;
-          currentPiece.style.zIndex = 10;
-          e.preventDefault();
-        }
-
-        function handleMouseMove(e) {
-          if (isDragging && currentPiece) {
-            const rect = puzzleBoard.getBoundingClientRect();
-            const x = e.clientX - rect.left - dragOffset.x;
-            const y = e.clientY - rect.top - dragOffset.y;
-            currentPiece.style.left = `${Math.max(0, Math.min(x, puzzleSize - pieceSize))}px`;
-            currentPiece.style.top = `${Math.max(0, Math.min(y, puzzleSize - pieceSize))}px`;
-          }
-        }
-
-        function handleTouchMove(e) {
-          if (isDragging && currentPiece) {
-            const rect = puzzleBoard.getBoundingClientRect();
-            const touch = e.touches[0];
-            const x = touch.clientX - rect.left - dragOffset.x;
-            const y = touch.clientY - rect.top - dragOffset.y;
-            currentPiece.style.left = `${Math.max(0, Math.min(x, puzzleSize - pieceSize))}px`;
-            currentPiece.style.top = `${Math.max(0, Math.min(y, puzzleSize - pieceSize))}px`;
-            e.preventDefault();
-          }
-        }
-
-        function endDrag(e) {
-          if (isDragging && currentPiece) {
-            const rect = puzzleBoard.getBoundingClientRect();
-            const clientX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX);
-            const clientY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY);
-            
-            if (clientX && clientY) {
-              const x = clientX - rect.left;
-              const y = clientY - rect.top;
-              const targetPos = Math.floor(y / pieceSize) * 2 + Math.floor(x / pieceSize);
-              
-              if (targetPos >= 0 && targetPos < 4) {
-                const currentPieceData = pieces.find(p => p.id == currentPiece.dataset.id);
-                const targetPiece = pieces.find(p => p.currentPos === targetPos);
-                
-                if (targetPiece && currentPieceData) {
-                  [currentPieceData.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, currentPieceData.currentPos];
-                }
-              }
-            }
-            
-            currentPiece.style.zIndex = 0;
-            isDragging = false;
-            currentPiece = null;
-            updatePuzzleDisplay();
-          }
-        }
-
-        function handleKeyboardMove(piece) {
-          // Simple keyboard navigation - swap with adjacent empty space
-          const emptyPos = pieces.length - 1; // Assuming last position is empty
-          const emptyPiece = pieces.find(p => p.currentPos === emptyPos);
-          
-          if (emptyPiece && Math.abs(piece.currentPos - emptyPiece.currentPos) <= 2) {
-            [piece.currentPos, emptyPiece.currentPos] = [emptyPiece.currentPos, piece.currentPos];
-            updatePuzzleDisplay();
-          }
-        }
-
-        function handleMobileMove(piece) {
-          // For mobile: swap with adjacent pieces
-          const adjacentPositions = [
-            piece.currentPos - 1, piece.currentPos + 1,
-            piece.currentPos - 2, piece.currentPos + 2
-          ].filter(pos => pos >= 0 && pos < 4);
-          
-          if (adjacentPositions.length > 0) {
-            const targetPos = adjacentPositions[0];
-            const targetPiece = pieces.find(p => p.currentPos === targetPos);
-            if (targetPiece) {
-              [piece.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, piece.currentPos];
-              updatePuzzleDisplay();
-            }
-          }
-        }
-
-        function updatePuzzleDisplay() {
-          const piecesElements = document.querySelectorAll('.puzzle-piece');
-          piecesElements.forEach(pieceEl => {
-            const pieceData = pieces.find(p => p.id == pieceEl.dataset.id);
-            if (pieceData) {
-              pieceEl.style.left = `${pieceData.currentPos % 2 * pieceSize}px`;
-              pieceEl.style.top = `${Math.floor(pieceData.currentPos / 2) * pieceSize}px`;
-              pieceEl.style.transition = 'all 0.3s ease';
-            }
-          });
-          
-          setTimeout(() => {
-            piecesElements.forEach(piece => piece.style.transition = '');
-          }, 300);
-          
-          checkPuzzleCompletion();
-        }
-
-        function checkPuzzleCompletion() {
-          const isSolved = pieces.every(piece => piece.currentPos === piece.correctPos);
-          if (isSolved) {
-            puzzleMessage.textContent = 'Ich liebe dich für immer! ❤️';
-            requestAnimationFrame(() => {
-              triggerConfetti();
-              triggerHearts(10);
-            });
-          } else {
-            puzzleMessage.textContent = 'Setze das Herz zusammen, um die Nachricht zu sehen!';
-          }
-        }
-
-        // Event listeners
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('touchmove', handleTouchMove, { passive: false });
-        document.addEventListener('mouseup', endDrag);
-        document.addEventListener('touchend', endDrag);
-
-        resetPuzzleButton.addEventListener('click', createPuzzle);
-        
-        // Initialize puzzle
-        createPuzzle();
-      }
 
       // Performance optimization: Use Intersection Observer for animations
       function initIntersectionObserver() {
@@ -1646,7 +1359,6 @@
         initBackgroundChanger();
         initSparkles();
         initPolaroids();
-        initPuzzle();
         initIntersectionObserver();
         
         // Performance: Preload images in viewport
