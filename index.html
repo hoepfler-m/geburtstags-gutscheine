@@ -3,9 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eine liebevolle Geburtstags-Website mit besonderen Gutscheinen und persönlichen Nachrichten">
+  <meta name="robots" content="noindex, nofollow">
   <title>Für dich, mein Herz ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Preload kritische Ressourcen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:wght@400;700&display=swap"></noscript>
+  
   <style>
+    :root {
+      --primary-red: #8B0000;
+      --primary-purple: #4B0082;
+      --accent-silver: #C0C0C0;
+      --hover-red: #A52A2A;
+      --font-primary: 'Lora', serif;
+      --font-heading: 'Cinzel', serif;
+      --transition-fast: 0.3s;
+      --border-radius: 8px;
+      --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.3);
+      --shadow-heavy: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,14 +34,32 @@
     }
 
     body {
-      font-family: 'Lora', serif;
-      background: linear-gradient(135deg, #8B0000, #4B0082);
+      font-family: var(--font-primary);
+      background: linear-gradient(135deg, var(--primary-red), var(--primary-purple));
       color: white;
       text-align: center;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
       transition: background 1s ease;
+      line-height: 1.6;
+    }
+
+    /* Skip Link für Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--primary-red);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 2000;
+      border-radius: 4px;
+    }
+
+    .skip-link:focus {
+      top: 6px;
     }
 
     nav {
@@ -36,26 +75,34 @@
       display: flex;
       justify-content: center;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     nav a {
-      color: #C0C0C0;
-      font-family: 'Cinzel', serif;
+      color: var(--accent-silver);
+      font-family: var(--font-heading);
       font-size: 1.2rem;
       text-decoration: none;
       padding: 10px 15px;
       border-radius: 5px;
-      transition: background 0.3s, color 0.3s;
+      transition: background var(--transition-fast), color var(--transition-fast);
+      display: block;
+      min-height: 44px; /* Touch-Target mindestens 44px */
+      display: flex;
+      align-items: center;
     }
 
-    nav a:hover {
-      background: #A52A2A;
+    nav a:hover,
+    nav a:focus {
+      background: var(--hover-red);
       color: white;
+      outline: 2px solid var(--accent-silver);
+      outline-offset: 2px;
     }
 
     nav a.active {
-      background: #C0C0C0;
-      color: #8B0000;
+      background: var(--accent-silver);
+      color: var(--primary-red);
     }
 
     .love-ticker {
@@ -69,7 +116,7 @@
     .love-ticker span {
       display: inline-block;
       font-size: 1rem;
-      color: #C0C0C0;
+      color: var(--accent-silver);
       animation: ticker 20s linear infinite;
     }
 
@@ -85,15 +132,15 @@
     }
 
     header h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 3.5rem;
-      color: #C0C0C0;
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive Typography */
+      color: var(--accent-silver);
       margin-bottom: 20px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     }
 
     header p {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
       line-height: 1.6;
       max-width: 700px;
       margin: 0 auto 30px;
@@ -105,21 +152,32 @@
       justify-content: center;
       gap: 15px;
       margin-bottom: 30px;
+      align-items: center;
     }
 
     .controls button {
-      background: #8B0000;
+      background: var(--primary-red);
       color: white;
-      border: 2px solid #C0C0C0;
-      padding: 8px 15px;
+      border: 2px solid var(--accent-silver);
+      padding: 12px 15px; /* Vergrößert für bessere Touch-Targets */
       font-size: 0.95rem;
-      border-radius: 8px;
+      border-radius: var(--border-radius);
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background var(--transition-fast), transform 0.1s ease;
+      min-height: 44px;
+      min-width: 44px;
     }
 
-    .controls button:hover {
-      background: #A52A2A;
+    .controls button:hover,
+    .controls button:focus {
+      background: var(--hover-red);
+      outline: 2px solid var(--accent-silver);
+      outline-offset: 2px;
+      transform: translateY(-1px);
+    }
+
+    .controls button:active {
+      transform: translateY(0);
     }
 
     .progress-bar {
@@ -133,7 +191,7 @@
 
     #progressFill {
       height: 100%;
-      background: #C0C0C0;
+      background: var(--accent-silver);
       width: 0;
       transition: width 0.5s ease;
     }
@@ -144,7 +202,7 @@
       left: 0;
       width: 100%;
       font-size: 0.85rem;
-      color: #C0C0C0;
+      color: var(--accent-silver);
     }
 
     .voucher-grid {
@@ -156,13 +214,25 @@
 
     .voucher {
       background: rgba(255, 255, 255, 0.15);
-      border: 2px solid #C0C0C0;
+      border: 2px solid var(--accent-silver);
       border-radius: 12px;
       padding: 15px;
       cursor: pointer;
-      transition: max-height 0.4s ease;
+      transition: max-height 0.4s ease, transform 0.2s ease;
       max-height: 120px;
       overflow: hidden;
+      position: relative;
+    }
+
+    .voucher:hover,
+    .voucher:focus-within {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-light);
+    }
+
+    .voucher:focus {
+      outline: 2px solid var(--accent-silver);
+      outline-offset: 2px;
     }
 
     .voucher.open {
@@ -171,9 +241,9 @@
     }
 
     .voucher-front h2 {
-      font-family: 'Cinzel', serif;
-      color: #C0C0C0;
-      font-size: 1.6rem;
+      font-family: var(--font-heading);
+      color: var(--accent-silver);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
       margin-bottom: 10px;
       word-wrap: break-word;
       overflow-wrap: break-word;
@@ -194,9 +264,9 @@
     }
 
     .voucher-back h3 {
-      font-family: 'Cinzel', serif;
-      color: #C0C0C0;
-      font-size: 1.4rem;
+      font-family: var(--font-heading);
+      color: var(--accent-silver);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
       margin-bottom: 10px;
       word-wrap: break-word;
       overflow-wrap: break-word;
@@ -216,9 +286,9 @@
     }
 
     .section h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
-      color: #C0C0C0;
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+      color: var(--accent-silver);
       margin-bottom: 20px;
     }
 
@@ -235,6 +305,7 @@
     .quiz-question p {
       font-size: 1rem;
       margin-bottom: 10px;
+      font-weight: 600;
     }
 
     .quiz-question label {
@@ -242,43 +313,73 @@
       font-size: 0.9rem;
       margin: 5px 0;
       cursor: pointer;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background var(--transition-fast);
+    }
+
+    .quiz-question label:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
     .quiz-question input {
       margin-right: 10px;
+      transform: scale(1.2); /* Größere Radio Buttons für bessere Usability */
     }
 
     .quiz-container button {
-      background: #8B0000;
+      background: var(--primary-red);
       color: white;
-      border: 2px solid #C0C0C0;
-      padding: 8px 15px;
+      border: 2px solid var(--accent-silver);
+      padding: 12px 15px;
       font-size: 0.95rem;
-      border-radius: 8px;
+      border-radius: var(--border-radius);
       cursor: pointer;
       margin-top: 10px;
+      min-height: 44px;
+      transition: all var(--transition-fast);
     }
 
-    .quiz-container button:hover {
-      background: #A52A2A;
+    .quiz-container button:hover,
+    .quiz-container button:focus {
+      background: var(--hover-red);
+      outline: 2px solid var(--accent-silver);
+      outline-offset: 2px;
     }
 
     #quizResult {
       margin-top: 20px;
       font-size: 1rem;
-      color: #C0C0C0;
+      color: var(--accent-silver);
+      font-weight: 600;
+    }
+
+    .polaroid-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
     }
 
     .polaroid-gallery .polaroid {
       background: white;
       padding: 8px;
       width: 200px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: var(--shadow-light);
       transform: rotate(-2deg);
+      transition: transform var(--transition-fast);
+      cursor: pointer;
     }
 
     .polaroid-gallery .polaroid:nth-child(even) {
       transform: rotate(2deg);
+    }
+
+    .polaroid-gallery .polaroid:hover,
+    .polaroid-gallery .polaroid:focus {
+      transform: rotate(0deg) scale(1.05);
+      z-index: 10;
     }
 
     .polaroid-image {
@@ -286,45 +387,54 @@
       height: 140px;
       background-size: cover;
       background-position: center;
+      background-color: #f0f0f0; /* Fallback */
     }
 
     .polaroid p {
       color: #333;
       font-size: 0.85rem;
       margin-top: 8px;
+      text-align: center;
     }
 
     #loveLetterButton {
-      background: #8B0000;
+      background: var(--primary-red);
       color: white;
-      border: 2px solid #C0C0C0;
-      padding: 12px 25px;
+      border: 2px solid var(--accent-silver);
+      padding: 15px 25px;
       font-size: 1.1rem;
-      border-radius: 8px;
+      border-radius: var(--border-radius);
       cursor: pointer;
       margin: 20px 0;
-      transition: background 0.3s;
+      transition: all var(--transition-fast);
+      min-height: 48px;
     }
 
-    #loveLetterButton:hover {
-      background: #A52A2A;
+    #loveLetterButton:hover,
+    #loveLetterButton:focus {
+      background: var(--hover-red);
+      transform: translateY(-2px);
+      outline: 2px solid var(--accent-silver);
+      outline-offset: 2px;
     }
 
     .love-letter {
       background: rgba(255, 255, 255, 0.95);
-      color: #8B0000;
+      color: var(--primary-red);
       padding: 30px;
       border-radius: 15px;
       max-width: 700px;
       margin: 40px auto;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: var(--shadow-heavy);
       position: relative;
       z-index: 1001;
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     .love-letter h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
       margin-bottom: 15px;
     }
 
@@ -332,19 +442,27 @@
       font-size: 1rem;
       line-height: 1.7;
       margin-bottom: 15px;
+      text-align: left;
     }
 
     .love-letter button {
-      background: #8B0000;
+      background: var(--primary-red);
       color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 8px;
+      border: 2px solid var(--primary-red);
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
       cursor: pointer;
+      font-size: 1rem;
+      min-height: 44px;
+      transition: all var(--transition-fast);
     }
 
-    .love-letter button:hover {
-      background: #A52A2A;
+    .love-letter button:hover,
+    .love-letter button:focus {
+      background: var(--hover-red);
+      border-color: var(--hover-red);
+      outline: 2px solid var(--primary-red);
+      outline-offset: 2px;
     }
 
     .overlay {
@@ -355,6 +473,7 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.7);
       z-index: 1000;
+      backdrop-filter: blur(5px);
     }
 
     #puzzleContainer {
@@ -369,8 +488,9 @@
       width: 300px;
       height: 300px;
       background: rgba(255, 255, 255, 0.2);
-      border: 2px solid #C0C0C0;
-      border-radius: 8px;
+      border: 2px solid var(--accent-silver);
+      border-radius: var(--border-radius);
+      margin: 0 auto;
     }
 
     .puzzle-piece {
@@ -378,28 +498,46 @@
       height: 150px;
       background-size: 300px 300px;
       cursor: move;
-      border: 1px solid #C0C0C0;
+      border: 1px solid var(--accent-silver);
+      transition: transform 0.1s ease;
+      position: relative;
+    }
+
+    .puzzle-piece:hover {
+      transform: scale(1.02);
+      z-index: 5;
+    }
+
+    .puzzle-piece:focus {
+      outline: 3px solid var(--accent-silver);
+      outline-offset: 2px;
     }
 
     #puzzleMessage {
       font-size: 1rem;
-      color: #C0C0C0;
+      color: var(--accent-silver);
       margin-top: 10px;
+      font-weight: 600;
     }
 
     #resetPuzzle {
-      background: #8B0000;
+      background: var(--primary-red);
       color: white;
-      border: 2px solid #C0C0C0;
-      padding: 8px 15px;
+      border: 2px solid var(--accent-silver);
+      padding: 12px 15px;
       font-size: 0.95rem;
-      border-radius: 8px;
+      border-radius: var(--border-radius);
       cursor: pointer;
       margin-top: 10px;
+      min-height: 44px;
+      transition: all var(--transition-fast);
     }
 
-    #resetPuzzle:hover {
-      background: #A52A2A;
+    #resetPuzzle:hover,
+    #resetPuzzle:focus {
+      background: var(--hover-red);
+      outline: 2px solid var(--accent-silver);
+      outline-offset: 2px;
     }
 
     .heart {
@@ -427,6 +565,37 @@
       z-index: 999;
     }
 
+    /* Visually Hidden Class für Screen Reader */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Focus-Styles für bessere Accessibility */
+    *:focus {
+      outline: 2px solid var(--accent-silver);
+      outline-offset: 2px;
+    }
+
+    /* Prefers-reduced-motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .love-ticker span {
+        animation: none;
+      }
+    }
+
     @media (max-width: 768px) {
       nav {
         position: static;
@@ -437,13 +606,8 @@
       }
       nav a {
         font-size: 1rem;
-        padding: 8px 12px;
-      }
-      header h1 {
-        font-size: 2.5rem;
-      }
-      header p {
-        font-size: 1rem;
+        padding: 12px 15px;
+        justify-content: center;
       }
       .voucher-grid {
         grid-template-columns: 1fr;
@@ -455,21 +619,12 @@
       .voucher.open {
         max-height: none;
       }
-      .voucher-front h2 {
-        font-size: 1.4rem;
-      }
-      .voucher-back h3 {
-        font-size: 1.2rem;
-      }
-      .voucher-front p, .voucher-back p {
-        font-size: 0.85rem;
-      }
       .controls {
         gap: 10px;
       }
       .controls button {
         font-size: 0.9rem;
-        padding: 6px 12px;
+        padding: 10px 12px;
       }
       .progress-bar {
         width: 160px;
@@ -484,12 +639,6 @@
         padding: 20px;
         margin: 20px auto;
       }
-      .love-letter h2 {
-        font-size: 1.8rem;
-      }
-      .love-letter p {
-        font-size: 0.9rem;
-      }
       .polaroid-gallery .polaroid {
         width: 180px;
       }
@@ -499,9 +648,6 @@
       }
       .polaroid p {
         font-size: 0.8rem;
-      }
-      .section h2 {
-        font-size: 1.8rem;
       }
       .quiz-container {
         max-width: 90%;
@@ -530,9 +676,6 @@
     }
 
     @media (max-width: 480px) {
-      header h1 {
-        font-size: 2rem;
-      }
       .voucher {
         max-height: 90px;
       }
@@ -540,12 +683,21 @@
         max-height: none;
       }
     }
+
+    /* High Contrast Support */
+    @media (prefers-contrast: high) {
+      .voucher, .controls button, .quiz-container button {
+        border-width: 3px;
+      }
+    }
   </style>
 </head>
 <body>
-  <nav>
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  
+  <nav role="navigation" aria-label="Hauptnavigation">
     <ul>
-      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#home" class="active" aria-current="page">Home</a></li>
       <li><a href="#our-story">Unsere Geschichte</a></li>
       <li><a href="#photo-album">Fotoalbum</a></li>
       <li><a href="#love-quiz">Liebes-Quiz</a></li>
@@ -553,679 +705,977 @@
       <li><a href="#love-diary">Tagebuch der Liebe</a></li>
     </ul>
   </nav>
-  <div class="love-ticker">
-    <span id="tickerText"></span>
+  
+  <div class="love-ticker" role="marquee" aria-label="Laufende Liebesbotschaften">
+    <span id="tickerText" aria-live="polite"></span>
   </div>
-  <div class="overlay hidden" id="overlay"></div>
+  
+  <div class="overlay hidden" id="overlay" aria-hidden="true"></div>
+  
   <div class="container">
-    <section id="home">
-      <header>
-        <h1>Alles Gute zum Geburtstag, mein Liebling! 🎉</h1>
-        <p>Das hier ist mein Geschenk für dich – ein Zeichen meiner Liebe und meines Versprechens, immer für dich da zu sein. Öffne die Gutscheine und lass dich überraschen!</p>
-      </header>
-      <div class="controls">
-        <button id="randomMessageButton">💕 Zufällige Liebesbotschaft</button>
-        <button id="changeBackgroundButton">🌌 Hintergrund ändern</button>
-        <div class="progress-bar">
-          <span id="progressText">0/20 Gutscheine geöffnet</span>
-          <div id="progressFill"></div>
-        </div>
-      </div>
-      <div class="voucher-grid">
-        <div class="voucher" data-id="1">
-          <div class="voucher-front">
-            <h2>Gutschein #1</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>❤️ Immer an deiner Seite</h3>
-            <p>Ich verspreche, immer für dich da zu sein, egal was kommt. In guten wie in schweren Zeiten werde ich deine Hand halten.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="2">
-          <div class="voucher-front">
-            <h2>Gutschein #2</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🎬 Gutschein für einen Kinoabend</h3>
-            <p>Ein Abend im Kino mit deinem Lieblingsfilm, Popcorn und gemütlichem Kuscheln danach.</p>
+    <main id="main-content">
+      <section id="home" aria-labelledby="home-heading">
+        <header>
+          <h1 id="home-heading">Alles Gute zum Geburtstag, mein Liebling! 🎉</h1>
+          <p>Das hier ist mein Geschenk für dich – ein Zeichen meiner Liebe und meines Versprechens, immer für dich da zu sein. Öffne die Gutscheine und lass dich überraschen!</p>
+        </header>
+        
+        <div class="controls" role="group" aria-label="Interaktive Steuerelemente">
+          <button type="button" id="randomMessageButton" aria-describedby="random-message-desc">
+            💕 Zufällige Liebesbotschaft
+          </button>
+          <span id="random-message-desc" class="sr-only">Zeigt eine zufällige romantische Nachricht an</span>
+          
+          <button type="button" id="changeBackgroundButton" aria-describedby="bg-change-desc">
+            🌌 Hintergrund ändern
+          </button>
+          <span id="bg-change-desc" class="sr-only">Ändert die Hintergrundfarben der Website</span>
+          
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" aria-labelledby="progress-label">
+            <span id="progressText" id="progress-label">0/20 Gutscheine geöffnet</span>
+            <div id="progressFill"></div>
           </div>
         </div>
-        <div class="voucher" data-id="3">
-          <div class="voucher-front">
-            <h2>Gutschein #3</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🙏 Gutschein für Geduld</h3>
-            <p>Ich werde zuhören und verstehen, auch wenn es schwer ist, und dir immer die Zeit geben, die du brauchst.</p>
-          </div>
+        
+        <div class="voucher-grid" role="region" aria-label="Gutscheine zum Öffnen">
+          <article class="voucher" data-id="1" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-1-title">
+            <div class="voucher-front">
+              <h2 id="voucher-1-title">Gutschein #1</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>❤️ Immer an deiner Seite</h3>
+              <p>Ich verspreche, immer für dich da zu sein, egal was kommt. In guten wie in schweren Zeiten werde ich deine Hand halten.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="2" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-2-title">
+            <div class="voucher-front">
+              <h2 id="voucher-2-title">Gutschein #2</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🎬 Gutschein für einen Kinoabend</h3>
+              <p>Ein Abend im Kino mit deinem Lieblingsfilm, Popcorn und gemütlichem Kuscheln danach.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="3" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-3-title">
+            <div class="voucher-front">
+              <h2 id="voucher-3-title">Gutschein #3</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🙏 Gutschein für Geduld</h3>
+              <p>Ich werde zuhören und verstehen, auch wenn es schwer ist, und dir immer die Zeit geben, die du brauchst.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="4" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-4-title">
+            <div class="voucher-front">
+              <h2 id="voucher-4-title">Gutschein #4</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🍽️ Gutschein für ein Candle-Light-Dinner</h3>
+              <p>Ein romantisches Abendessen, nur wir zwei, bei Kerzenschein, mit deinem Lieblingsessen.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="5" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-5-title">
+            <div class="voucher-front">
+              <h2 id="voucher-5-title">Gutschein #5</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🚪 Nie wieder weglaufen</h3>
+              <p>Ich bleibe, auch wenn es im Streit schwer wird, und arbeite an uns, egal was passiert.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="6" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-6-title">
+            <div class="voucher-front">
+              <h2 id="voucher-6-title">Gutschein #6</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🧘 Wellness-Tag</h3>
+              <p>Ein Tag voller Entspannung mit Massage, Sauna und allem, was dir gut tut.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="7" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-7-title">
+            <div class="voucher-front">
+              <h2 id="voucher-7-title">Gutschein #7</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>💕 Gutschein für meine Liebe</h3>
+              <p>Ich werde dich immer lieben, respektieren und dir zeigen, wie viel du mir bedeutest.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="8" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-8-title">
+            <div class="voucher-front">
+              <h2 id="voucher-8-title">Gutschein #8</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🌆 Städtereise</h3>
+              <p>Ein Wochenende in einer Stadt deiner Wahl, voller Abenteuer und schöner Momente.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="9" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-9-title">
+            <div class="voucher-front">
+              <h2 id="voucher-9-title">Gutschein #9</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🤗 Gutschein für Umarmungen</h3>
+              <p>Jederzeit eine feste Umarmung, wenn du sie brauchst, um dich sicher zu fühlen.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="10" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-10-title">
+            <div class="voucher-front">
+              <h2 id="voucher-10-title">Gutschein #10</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>📺 Filmabend zu Hause</h3>
+              <p>Ein gemütlicher Abend mit Snacks, deinen Lieblingsserien und ganz viel Kuscheln.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="11" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-11-title">
+            <div class="voucher-front">
+              <h2 id="voucher-11-title">Gutschein #11</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🗣️ Gutschein für Zuhören</h3>
+              <p>Ich bin immer da, um dir zuzuhören, ohne zu urteilen, egal worüber du sprechen möchtest.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="12" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-12-title">
+            <div class="voucher-front">
+              <h2 id="voucher-12-title">Gutschein #12</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🌳 Picknick im Park</h3>
+              <p>Ein Nachmittag mit Decke, Snacks, Sonnenschein und entspannten Gesprächen.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="13" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-13-title">
+            <div class="voucher-front">
+              <h2 id="voucher-13-title">Gutschein #13</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🌹 Gutschein für Überraschungen</h3>
+              <p>Eine kleine Überraschung, wann immer du es am wenigsten erwartest, um dir ein Lächeln zu schenken.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="14" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-14-title">
+            <div class="voucher-front">
+              <h2 id="voucher-14-title">Gutschein #14</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🎨 Gemeinsames Basteln</h3>
+              <p>Ein kreativer Tag, an dem wir etwas Schönes schaffen, nur für uns zwei.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="15" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-15-title">
+            <div class="voucher-front">
+              <h2 id="voucher-15-title">Gutschein #15</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>👥 Gutschein für Teamwork</h3>
+              <p>Wir lösen Probleme zusammen, Hand in Hand, und wachsen als Team.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="16" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-16-title">
+            <div class="voucher-front">
+              <h2 id="voucher-16-title">Gutschein #16</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🚶 Spaziergang bei Sonnenuntergang</h3>
+              <p>Ein romantischer Abendspaziergang Hand in Hand, während die Sonne untergeht.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="17" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-17-title">
+            <div class="voucher-front">
+              <h2 id="voucher-17-title">Gutschein #17</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🌟 Gutschein für gemeinsame Träume</h3>
+              <p>Wir arbeiten an unseren gemeinsamen Zielen, Schritt für Schritt, für unsere Zukunft.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="18" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-18-title">
+            <div class="voucher-front">
+              <h2 id="voucher-18-title">Gutschein #18</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>🍫 Schokoladenverkostung</h3>
+              <p>Ein süßer Abend mit verschiedenen Schokoladen und gemütlichen Gesprächen.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="19" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-19-title">
+            <div class="voucher-front">
+              <h2 id="voucher-19-title">Gutschein #19</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>💌 Gutschein für kleine Liebesbriefe</h3>
+              <p>Ich schreibe dir regelmäßig kleine Botschaften, um dir meine Liebe zu zeigen, wann immer du sie brauchst.</p>
+            </div>
+          </article>
+          
+          <article class="voucher" data-id="20" tabindex="0" role="button" aria-expanded="false" aria-labelledby="voucher-20-title">
+            <div class="voucher-front">
+              <h2 id="voucher-20-title">Hauptgutschein</h2>
+              <p>Klick zum Öffnen</p>
+            </div>
+            <div class="voucher-back">
+              <h3>💞 Für immer und ewig an deiner Seite</h3>
+              <p>Mein heiliges Versprechen: Ich bleibe an deiner Seite, komme was wolle, für immer und ewig, mit all meiner Liebe.</p>
+            </div>
+          </article>
         </div>
-        <div class="voucher" data-id="4">
-          <div class="voucher-front">
-            <h2>Gutschein #4</h2>
-            <p>Klick zum Öffnen</p>
+        
+        <button type="button" id="loveLetterButton">💌 Öffne deinen Liebesbrief</button>
+        
+        <div class="love-letter hidden" id="loveLetter" role="dialog" aria-labelledby="letter-heading" aria-modal="true">
+          <h2 id="letter-heading">Mein Liebling,</h2>
+          <div id="letterText">
+            <p>Mein Schatz,</p>
+            <p>Du bist der wichtigste Mensch in meinem Leben, mein Licht in dunklen Zeiten und mein Grund, jeden Tag besser zu sein. Ich weiß, dass ich in der Vergangenheit Fehler gemacht habe – manchmal war ich egoistisch, bin im Streit gegangen und habe dich allein gelassen. Das tut mir unendlich leid, und ich verspreche dir von Herzen, dass ich daran arbeite, der Partner zu sein, den du verdienst. Nie wieder werde ich weglaufen, nie wieder werde ich dich im Stich lassen. Stattdessen will ich an deiner Seite stehen, dich in den Arm nehmen, dir zuhören und mit dir gemeinsam jedes Hindernis überwinden.</p>
+            <p>Du machst mein Leben so viel bunter und reicher. Dein Lächeln bringt mich zum Strahlen, dein Lachen ist meine liebste Melodie, und deine Nähe gibt mir das Gefühl, zu Hause zu sein. Diese Gutscheine sind kleine Versprechen, die ich dir gebe – für gemeinsame Abenteuer, für ruhige Momente, für Liebe und Respekt. Aber mein größtes Versprechen ist, dass ich immer für dich da sein werde, in guten wie in schweren Zeiten. Ich will mit dir lachen, träumen, reisen und ein Leben aufbauen, das uns beide glücklich macht.</p>
+            <p>Ich denke an all die kleinen Momente, die uns verbinden – wie wir zusammen gelacht haben, wie du mich in den Arm genommen hast, wenn ich es am meisten brauchte, oder wie wir einfach still beieinander saßen und die Welt perfekt war. Ich will mehr solcher Momente schaffen, jeden Tag. Du bist mein Ein und Alles, und ich werde alles tun, um dich glücklich zu machen. Ich liebe dich mehr, als Worte je ausdrücken könnten, und ich freue mich auf eine Zukunft mit dir, voller Liebe, Vertrauen und unvergesslicher Erinnerungen.</p>
+            <p>In Liebe, für immer dein,<br>[Dein Name]</p>
           </div>
-          <div class="voucher-back">
-            <h3>🍽️ Gutschein für ein Candle-Light-Dinner</h3>
-            <p>Ein romantisches Abendessen, nur wir zwei, bei Kerzenschein, mit deinem Lieblingsessen.</p>
-          </div>
+          <button type="button" onclick="closeLoveLetter()" aria-label="Liebesbrief schließen">Schließen</button>
         </div>
-        <div class="voucher" data-id="5">
-          <div class="voucher-front">
-            <h2>Gutschein #5</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🚪 Nie wieder weglaufen</h3>
-            <p>Ich bleibe, auch wenn es im Streit schwer wird, und arbeite an uns, egal was passiert.</p>
-          </div>
+        
+        <section id="puzzleContainer" aria-labelledby="puzzle-heading">
+          <h2 id="puzzle-heading">Herz-Puzzle</h2>
+          <p>Setze das Herz zusammen, um eine besondere Nachricht zu sehen!</p>
+          <div id="puzzleBoard" role="application" aria-label="Interaktives Puzzle-Spiel"></div>
+          <p id="puzzleMessage" aria-live="polite">Ziehe die Teile, um das Herz zu sehen!</p>
+          <button type="button" id="resetPuzzle">Puzzle zurücksetzen</button>
+        </section>
+      </section>
+      
+      <section id="our-story" class="section hidden" aria-labelledby="story-heading">
+        <h2 id="story-heading">Unsere Geschichte</h2>
+        <p>Hier könnte die Geschichte eurer Beziehung stehen – vom ersten Treffen bis zu den wichtigsten Momenten. Zum Beispiel: „Wir trafen uns an einem verregneten Tag, und seitdem ist jeder Tag mit dir wie Sonnenschein."</p>
+      </section>
+      
+      <section id="photo-album" class="section hidden" aria-labelledby="album-heading">
+        <h2 id="album-heading">Fotoalbum</h2>
+        <div class="polaroid-gallery" role="region" aria-label="Sammlung von Erinnerungsfotos">
+          <figure class="polaroid" tabindex="0" role="button" aria-labelledby="photo-1-caption">
+            <div class="polaroid-image" style="background-image: url('https://via.placeholder.com/200x150?text=Erinnerung+1')" role="img" aria-label="Erstes gemeinsames Foto"></div>
+            <figcaption id="photo-1-caption">Unsere erste Begegnung</figcaption>
+          </figure>
+          <figure class="polaroid" tabindex="0" role="button" aria-labelledby="photo-2-caption">
+            <div class="polaroid-image" style="background-image: url('https://via.placeholder.com/200x150?text=Erinnerung+2')" role="img" aria-label="Romantischer Moment"></div>
+            <figcaption id="photo-2-caption">Unser erster Kuss</figcaption>
+          </figure>
+          <figure class="polaroid" tabindex="0" role="button" aria-labelledby="photo-3-caption">
+            <div class="polaroid-image" style="background-image: url('https://via.placeholder.com/200x150?text=Erinnerung+3')" role="img" aria-label="Besonderer Moment"></div>
+            <figcaption id="photo-3-caption">Ein besonderer Moment</figcaption>
+          </figure>
         </div>
-        <div class="voucher" data-id="6">
-          <div class="voucher-front">
-            <h2>Gutschein #6</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🧘 Wellness-Tag</h3>
-            <p>Ein Tag voller Entspannung mit Massage, Sauna und allem, was dir gut tut.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="7">
-          <div class="voucher-front">
-            <h2>Gutschein #7</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>💕 Gutschein für meine Liebe</h3>
-            <p>Ich werde dich immer lieben, respektieren und dir zeigen, wie viel du mir bedeutest.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="8">
-          <div class="voucher-front">
-            <h2>Gutschein #8</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🌆 Städtereise</h3>
-            <p>Ein Wochenende in einer Stadt deiner Wahl, voller Abenteuer und schöner Momente.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="9">
-          <div class="voucher-front">
-            <h2>Gutschein #9</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🤗 Gutschein für Umarmungen</h3>
-            <p>Jederzeit eine feste Umarmung, wenn du sie brauchst, um dich sicher zu fühlen.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="10">
-          <div class="voucher-front">
-            <h2>Gutschein #10</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>📺 Filmabend zu Hause</h3>
-            <p>Ein gemütlicher Abend mit Snacks, deinen Lieblingsserien und ganz viel Kuscheln.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="11">
-          <div class="voucher-front">
-            <h2>Gutschein #11</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🗣️ Gutschein für Zuhören</h3>
-            <p>Ich bin immer da, um dir zuzuhören, ohne zu urteilen, egal worüber du sprechen möchtest.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="12">
-          <div class="voucher-front">
-            <h2>Gutschein #12</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🌳 Picknick im Park</h3>
-            <p>Ein Nachmittag mit Decke, Snacks, Sonnenschein und entspannten Gesprächen.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="13">
-          <div class="voucher-front">
-            <h2>Gutschein #13</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🌹 Gutschein für Überraschungen</h3>
-            <p>Eine kleine Überraschung, wann immer du es am wenigsten erwartest, um dir ein Lächeln zu schenken.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="14">
-          <div class="voucher-front">
-            <h2>Gutschein #14</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🎨 Gemeinsames Basteln</h3>
-            <p>Ein kreativer Tag, an dem wir etwas Schönes schaffen, nur für uns zwei.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="15">
-          <div class="voucher-front">
-            <h2>Gutschein #15</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>👥 Gutschein für Teamwork</h3>
-            <p>Wir lösen Probleme zusammen, Hand in Hand, und wachsen als Team.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="16">
-          <div class="voucher-front">
-            <h2>Gutschein #16</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🚶 Spaziergang bei Sonnenuntergang</h3>
-            <p>Ein romantischer Abendspaziergang Hand in Hand, während die Sonne untergeht.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="17">
-          <div class="voucher-front">
-            <h2>Gutschein #17</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🌟 Gutschein für gemeinsame Träume</h3>
-            <p>Wir arbeiten an unseren gemeinsamen Zielen, Schritt für Schritt, für unsere Zukunft.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="18">
-          <div class="voucher-front">
-            <h2>Gutschein #18</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>🍫 Schokoladenverkostung</h3>
-            <p>Ein süßer Abend mit verschiedenen Schokoladen und gemütlichen Gesprächen.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="19">
-          <div class="voucher-front">
-            <h2>Gutschein #19</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>💌 Gutschein für kleine Liebesbriefe</h3>
-            <p>Ich schreibe dir regelmäßig kleine Botschaften, um dir meine Liebe zu zeigen, wann immer du sie brauchst.</p>
-          </div>
-        </div>
-        <div class="voucher" data-id="20">
-          <div class="voucher-front">
-            <h2>Hauptgutschein</h2>
-            <p>Klick zum Öffnen</p>
-          </div>
-          <div class="voucher-back">
-            <h3>💞 Für immer und ewig an deiner Seite</h3>
-            <p>Mein heiliges Versprechen: Ich bleibe an deiner Seite, komme was wolle, für immer und ewig, mit all meiner Liebe.</p>
-          </div>
-        </div>
-      </div>
-      <button id="loveLetterButton">💌 Öffne deinen Liebesbrief</button>
-      <div class="love-letter hidden" id="loveLetter">
-        <h2>Mein Liebling,</h2>
-        <p id="letterText">Mein Schatz,
-
-Du bist der wichtigste Mensch in meinem Leben, mein Licht in dunklen Zeiten und mein Grund, jeden Tag besser zu sein. Ich weiß, dass ich in der Vergangenheit Fehler gemacht habe – manchmal war ich egoistisch, bin im Streit gegangen und habe dich allein gelassen. Das tut mir unendlich leid, und ich verspreche dir von Herzen, dass ich daran arbeite, der Partner zu sein, den du verdienst. Nie wieder werde ich weglaufen, nie wieder werde ich dich im Stich lassen. Stattdessen will ich an deiner Seite stehen, dich in den Arm nehmen, dir zuhören und mit dir gemeinsam jedes Hindernis überwinden.
-
-Du machst mein Leben so viel bunter und reicher. Dein Lächeln bringt mich zum Strahlen, dein Lachen ist meine liebste Melodie, und deine Nähe gibt mir das Gefühl, zu Hause zu sein. Diese Gutscheine sind kleine Versprechen, die ich dir gebe – für gemeinsame Abenteuer, für ruhige Momente, für Liebe und Respekt. Aber mein größtes Versprechen ist, dass ich immer für dich da sein werde, in guten wie in schweren Zeiten. Ich will mit dir lachen, träumen, reisen und ein Leben aufbauen, das uns beide glücklich macht.
-
-Ich denke an all die kleinen Momente, die uns verbinden – wie wir zusammen gelacht haben, wie du mich in den Arm genommen hast, wenn ich es am meisten brauchte, oder wie wir einfach still beieinander saßen und die Welt perfekt war. Ich will mehr solcher Momente schaffen, jeden Tag. Du bist mein Ein und Alles, und ich werde alles tun, um dich glücklich zu machen. Ich liebe dich mehr, als Worte je ausdrücken könnten, und ich freue mich auf eine Zukunft mit dir, voller Liebe, Vertrauen und unvergesslicher Erinnerungen.
-
-In Liebe, für immer dein,
-[Dein Name]</p>
-        <button onclick="closeLoveLetter()">Schließen</button>
-      </div>
-      <div id="puzzleContainer">
-        <h2>Herz-Puzzle</h2>
-        <p>Setze das Herz zusammen, um eine besondere Nachricht zu sehen!</p>
-        <div id="puzzleBoard"></div>
-        <p id="puzzleMessage"></p>
-        <button id="resetPuzzle">Puzzle zurücksetzen</button>
-      </div>
-    </section>
-    <section id="our-story" class="section hidden">
-      <h2>Unsere Geschichte</h2>
-      <p>Hier könnte die Geschichte eurer Beziehung stehen – vom ersten Treffen bis zu den wichtigsten Momenten. Zum Beispiel: „Wir trafen uns an einem verregneten Tag, und seitdem ist jeder Tag mit dir wie Sonnenschein.“</p>
-    </section>
-    <section id="photo-album" class="section hidden">
-      <h2>Fotoalbum</h2>
-      <div class="polaroid-gallery">
-        <div class="polaroid">
-          <div class="polaroid-image" style="background-image: url('https://via.placeholder.com/200x150?text=Erinnerung+1')"></div>
-          <p>Unsere erste Begegnung</p>
-        </div>
-        <div class="polaroid">
-          <div class="polaroid-image" style="background-image: url('https://via.placeholder.com/200x150?text=Erinnerung+2')"></div>
-          <p>Unser erster Kuss</p>
-        </div>
-        <div class="polaroid">
-          <div class="polaroid-image" style="background-image: url('https://via.placeholder.com/200x150?text=Erinnerung+3')"></div>
-          <p>Ein besonderer Moment</p>
-        </div>
-      </div>
-    </section>
-    <section id="love-quiz" class="section hidden">
-      <h2>Liebes-Quiz</h2>
-      <div class="quiz-container">
-        <div class="quiz-question">
-          <p>Wo war unser erstes Date?</p>
-          <label><input type="radio" name="q1" value="a"> Im Café</label>
-          <label><input type="radio" name="q1" value="b"> Im Park</label>
-          <label><input type="radio" name="q1" value="c"> Im Kino</label>
-        </div>
-        <div class="quiz-question">
-          <p>Was ist mein Lieblingsessen?</p>
-          <label><input type="radio" name="q2" value="a"> Pizza</label>
-          <label><input type="radio" name="q2" value="b"> Sushi</label>
-          <label><input type="radio" name="q2" value="c"> Pasta</label>
-        </div>
-        <button onclick="checkQuiz()">Antworten prüfen</button>
-        <p id="quizResult"></p>
-      </div>
-    </section>
-    <section id="future-plans" class="section hidden">
-      <h2>Zukunftspläne</h2>
-      <p>Unsere gemeinsamen Träume, wie eine Reise nach Italien, ein gemeinsames Zuhause oder einfach viele weitere Jahre voller Liebe.</p>
-    </section>
-    <section id="love-diary" class="section hidden">
-      <h2>Tagebuch der Liebe</h2>
-      <p>Kleine Anekdoten und Liebesbotschaften, z. B. „Erinnerst du dich, wie wir im Regen getanzt haben?“</p>
-    </section>
+      </section>
+      
+      <section id="love-quiz" class="section hidden" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Liebes-Quiz</h2>
+        <form class="quiz-container" role="form" aria-labelledby="quiz-heading">
+          <fieldset class="quiz-question">
+            <legend>Wo war unser erstes Date?</legend>
+            <label><input type="radio" name="q1" value="a" required> Im Café</label>
+            <label><input type="radio" name="q1" value="b" required> Im Park</label>
+            <label><input type="radio" name="q1" value="c" required> Im Kino</label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>Was ist mein Lieblingsessen?</legend>
+            <label><input type="radio" name="q2" value="a" required> Pizza</label>
+            <label><input type="radio" name="q2" value="b" required> Sushi</label>
+            <label><input type="radio" name="q2" value="c" required> Pasta</label>
+          </fieldset>
+          <button type="button" onclick="checkQuiz()">Antworten prüfen</button>
+          <p id="quizResult" aria-live="polite"></p>
+        </form>
+      </section>
+      
+      <section id="future-plans" class="section hidden" aria-labelledby="future-heading">
+        <h2 id="future-heading">Zukunftspläne</h2>
+        <p>Unsere gemeinsamen Träume, wie eine Reise nach Italien, ein gemeinsames Zuhause oder einfach viele weitere Jahre voller Liebe.</p>
+      </section>
+      
+      <section id="love-diary" class="section hidden" aria-labelledby="diary-heading">
+        <h2 id="diary-heading">Tagebuch der Liebe</h2>
+        <p>Kleine Anekdoten und Liebesbotschaften, z. B. „Erinnerst du dich, wie wir im Regen getanzt haben?"</p>
+      </section>
+    </main>
   </div>
-  <canvas id="confettiCanvas"></canvas>
-  <canvas id="sparkleCanvas"></canvas>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script>
-    // Navigation
-    const navLinks = document.querySelectorAll('nav a');
-    const sections = document.querySelectorAll('.section');
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        sections.forEach(section => {
-          section.classList.add('hidden');
-          if (section.id === targetId) {
-            section.classList.remove('hidden');
-          }
-        });
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      });
-    });
-
-    // Gutschein-Akkordeon
-    const vouchers = document.querySelectorAll('.voucher');
-    let openedVouchers = 0;
-
-    vouchers.forEach(voucher => {
-      voucher.addEventListener('click', () => {
-        const isOpen = voucher.classList.contains('open');
-        vouchers.forEach(v => {
-          if (v !== voucher) {
-            v.classList.remove('open');
-          }
-        });
-        if (!isOpen) {
-          voucher.classList.add('open');
-          if (!voucher.classList.contains('opened')) {
-            voucher.classList.add('opened');
-            openedVouchers++;
-            updateProgress();
-            triggerConfetti();
-            triggerHearts(5);
-            triggerSparkles();
-          }
-        } else {
-          voucher.classList.remove('open');
-        }
-      });
-    });
-
-    // Fortschrittsbalken aktualisieren
-    function updateProgress() {
+  
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+  <canvas id="sparkleCanvas" aria-hidden="true"></canvas>
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script defer>
+    // Performance optimization: Wait for DOM content to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cache DOM elements for better performance
+      const navLinks = document.querySelectorAll('nav a');
+      const sections = document.querySelectorAll('.section');
+      const vouchers = document.querySelectorAll('.voucher');
       const progressFill = document.getElementById('progressFill');
       const progressText = document.getElementById('progressText');
-      const percentage = (openedVouchers / 20) * 100;
-      progressFill.style.width = `${percentage}%`;
-      progressText.textContent = `${openedVouchers}/20 Gutscheine geöffnet`;
-      if (openedVouchers === 20) {
-        triggerConfetti();
-        alert('Du hast alle Gutscheine geöffnet! Ich liebe dich! ❤️');
-      }
-    }
-
-    // Liebesbrief
-    document.getElementById('loveLetterButton').addEventListener('click', () => {
-      document.getElementById('loveLetter').classList.remove('hidden');
-      document.getElementById('overlay').classList.remove('hidden');
-      triggerConfetti();
-      triggerHearts(10);
-    });
-
-    function closeLoveLetter() {
-      document.getElementById('loveLetter').classList.add('hidden');
-      document.getElementById('overlay').classList.add('hidden');
-    }
-
-    // Zufällige Liebesbotschaften
-    const loveMessages = [
-      'Du bist mein Sonnenschein an jedem Tag. ☀️',
-      'Mit dir ist jede Sekunde magisch. ✨',
-      'Ich liebe dein Lachen mehr als alles andere. 😊',
-      'Du machst mein Herz jeden Tag aufs Neue glücklich. ❤️',
-      'Mit dir an meiner Seite kann ich alles schaffen. 💪',
-      'Du bist mein größtes Abenteuer. 🌍',
-      'Ich bin so dankbar, dass du an meiner Seite bist. 🙏',
-      'Deine Liebe gibt mir Flügel. 🕊️'
-    ];
-
-    document.getElementById('randomMessageButton').addEventListener('click', () => {
-      const message = loveMessages[Math.floor(Math.random() * loveMessages.length)];
-      alert(message);
-      triggerHearts(3);
-    });
-
-    // Liebes-Ticker
-    const tickerText = document.getElementById('tickerText');
-    tickerText.textContent = loveMessages.join(' • ');
-    setInterval(() => {
-      tickerText.style.animation = 'none';
-      setTimeout(() => {
-        tickerText.style.animation = 'ticker 20s linear infinite';
-      }, 10);
-    }, 20000);
-
-    // Hintergrundwechsel
-    const backgrounds = [
-      'linear-gradient(135deg, #8B0000, #4B0082)',
-      'linear-gradient(135deg, #FF69B4, #800080)',
-      'linear-gradient(135deg, #C71585, #483D8B)',
-      'linear-gradient(135deg, #B22222, #2F4F4F)'
-    ];
-
-    let currentBackground = 0;
-    document.getElementById('changeBackgroundButton').addEventListener('click', () => {
-      currentBackground = (currentBackground + 1) % backgrounds.length;
-      document.body.style.background = backgrounds[currentBackground];
-      triggerSparkles();
-    });
-
-    // Herz-Regen
-    function triggerHearts(count) {
-      for (let i = 0; i < count; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = `${Math.random() * window.innerWidth}px`;
-        heart.style.top = `${window.innerHeight}px`;
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 2000);
-      }
-    }
-
-    // Konfetti-Effekt
-    function triggerConfetti() {
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ['#C0C0C0', '#8B0000', '#FFFFFF']
-      });
-    }
-
-    // Funkeln-Effekt
-    const sparkleCanvas = document.getElementById('sparkleCanvas');
-    const ctx = sparkleCanvas.getContext('2d');
-    sparkleCanvas.width = window.innerWidth;
-    sparkleCanvas.height = window.innerHeight;
-
-    const sparkles = [];
-    function createSparkle() {
-      return {
-        x: Math.random() * sparkleCanvas.width,
-        y: Math.random() * sparkleCanvas.height,
-        size: Math.random() * 5 + 2,
-        speed: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.5
-      };
-    }
-
-    function triggerSparkles() {
-      for (let i = 0; i < 20; i++) {
-        sparkles.push(createSparkle());
-      }
-    }
-
-    function animateSparkles() {
-      ctx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
-      sparkles.forEach((sparkle, index) => {
-        ctx.beginPath();
-        ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(192, 192, 192, ${sparkle.opacity})`;
-        ctx.fill();
-        sparkle.y -= sparkle.speed;
-        sparkle.opacity -= 0.01;
-        if (sparkle.opacity <= 0) {
-          sparkles.splice(index, 1);
-        }
-      });
-      requestAnimationFrame(animateSparkles);
-    }
-
-    window.addEventListener('resize', () => {
-      sparkleCanvas.width = window.innerWidth;
-      sparkleCanvas.height = window.innerHeight;
-    });
-
-    animateSparkles();
-
-    // Polaroid-Klick-Effekt
-    const polaroids = document.querySelectorAll('.polaroid');
-    polaroids.forEach(polaroid => {
-      polaroid.addEventListener('click', () => {
-        polaroid.style.transform = `rotate(${Math.random() * 4 - 2}deg) scale(1.1)`;
-        setTimeout(() => {
-          polaroid.style.transform = polaroid.classList.contains('even') ? 'rotate(2deg)' : 'rotate(-2deg)';
-        }, 300);
-        triggerHearts(3);
-      });
-    });
-
-    // Liebes-Quiz
-    function checkQuiz() {
-      const q1 = document.querySelector('input[name="q1"]:checked');
-      const q2 = document.querySelector('input[name="q2"]:checked');
-      const result = document.getElementById('quizResult');
-      let score = 0;
-      let message = '';
-
-      if (q1 && q1.value === 'b') { // Angenommen, "Im Park" ist korrekt
-        score++;
-      }
-      if (q2 && q2.value === 'c') { // Angenommen, "Pasta" ist korrekt
-        score++;
-      }
-
-      if (score === 2) {
-        message = 'Wow, du kennst mich so gut! Du bist mein perfekter Partner! ❤️';
-        triggerConfetti();
-        triggerHearts(5);
-      } else if (score === 1) {
-        message = 'Fast perfekt! Du machst mein Herz trotzdem schneller schlagen! 😊';
-        triggerHearts(3);
-      } else {
-        message = 'Kein Problem, wir lernen uns jeden Tag besser kennen! Ich liebe dich! 💕';
-        triggerHearts(3);
-      }
-
-      result.textContent = message;
-    }
-
-    // Herz-Puzzle
-    const puzzleContainer = document.getElementById('puzzleContainer');
-    const puzzleBoard = document.getElementById('puzzleBoard');
-    const puzzleMessage = document.getElementById('puzzleMessage');
-    const resetPuzzleButton = document.getElementById('resetPuzzle');
-    const puzzleSize = window.innerWidth <= 768 ? 200 : 300;
-    const pieceSize = puzzleSize / 2;
-    let pieces = [];
-    let isDragging = false;
-    let currentPiece = null;
-
-    function initPuzzle() {
-      puzzleBoard.innerHTML = '';
-      pieces = [
-        { id: 0, correctPos: 0, currentPos: 0, x: 0, y: 0 },
-        { id: 1, correctPos: 1, currentPos: 1, x: pieceSize, y: 0 },
-        { id: 2, correctPos: 2, currentPos: 2, x: 0, y: pieceSize },
-        { id: 3, correctPos: 3, currentPos: 3, x: pieceSize, y: pieceSize }
+      const progressBar = document.querySelector('.progress-bar');
+      const tickerText = document.getElementById('tickerText');
+      const overlay = document.getElementById('overlay');
+      const loveLetter = document.getElementById('loveLetter');
+      const loveLetterButton = document.getElementById('loveLetterButton');
+      const randomMessageButton = document.getElementById('randomMessageButton');
+      const changeBackgroundButton = document.getElementById('changeBackgroundButton');
+      
+      let openedVouchers = 0;
+      let currentBackground = 0;
+      
+      // Constants
+      const loveMessages = [
+        'Du bist mein Sonnenschein an jedem Tag. ☀️',
+        'Mit dir ist jede Sekunde magisch. ✨',
+        'Ich liebe dein Lachen mehr als alles andere. 😊',
+        'Du machst mein Herz jeden Tag aufs Neue glücklich. ❤️',
+        'Mit dir an meiner Seite kann ich alles schaffen. 💪',
+        'Du bist mein größtes Abenteuer. 🌍',
+        'Ich bin so dankbar, dass du an meiner Seite bist. 🙏',
+        'Deine Liebe gibt mir Flügel. 🕊️'
       ];
-      // Mische die Puzzleteile
-      for (let i = pieces.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [pieces[i].currentPos, pieces[j].currentPos] = [pieces[j].currentPos, pieces[i].currentPos];
+      
+      const backgrounds = [
+        'linear-gradient(135deg, #8B0000, #4B0082)',
+        'linear-gradient(135deg, #FF69B4, #800080)',
+        'linear-gradient(135deg, #C71585, #483D8B)',
+        'linear-gradient(135deg, #B22222, #2F4F4F)'
+      ];
+
+      // Navigation with improved accessibility
+      function initNavigation() {
+        navLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            
+            // Hide all sections and show target
+            sections.forEach(section => {
+              section.classList.add('hidden');
+              section.setAttribute('aria-hidden', 'true');
+              if (section.id === targetId) {
+                section.classList.remove('hidden');
+                section.setAttribute('aria-hidden', 'false');
+                // Focus management for accessibility
+                const heading = section.querySelector('h2');
+                if (heading) heading.focus();
+              }
+            });
+            
+            // Update active navigation state
+            navLinks.forEach(l => {
+              l.classList.remove('active');
+              l.removeAttribute('aria-current');
+            });
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+          });
+          
+          // Keyboard navigation support
+          link.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              link.click();
+            }
+          });
+        });
       }
-      pieces.forEach(piece => {
-        const div = document.createElement('div');
-        div.classList.add('puzzle-piece');
-        div.dataset.id = piece.id;
-        const pos = pieces.find(p => p.currentPos === piece.id);
-        div.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="red"/><text x="150" y="150" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">Ich liebe dich</text></svg>')`;
-        div.style.backgroundPosition = `-${pos.x}px -${pos.y}px`;
-        div.style.left = `${piece.currentPos % 2 * pieceSize}px`;
-        div.style.top = `${Math.floor(piece.currentPos / 2) * pieceSize}px`;
-        puzzleBoard.appendChild(div);
 
-        // Drag-and-Drop für Desktop
-        div.addEventListener('mousedown', startDrag);
-        div.addEventListener('touchstart', startTouch);
-
-        // Klick-Interaktion für Mobilgeräte
-        div.addEventListener('click', () => {
-          if (window.innerWidth <= 768) {
-            const emptyPos = pieces.find(p => p.currentPos === pieces.length - 1);
-            if (Math.abs(piece.currentPos - emptyPos.currentPos) === 1 || Math.abs(piece.currentPos - emptyPos.currentPos) === 2) {
-              [piece.currentPos, emptyPos.currentPos] = [emptyPos.currentPos, piece.currentPos];
-              updatePuzzle();
+      // Voucher functionality with accessibility improvements
+      function initVouchers() {
+        vouchers.forEach(voucher => {
+          function toggleVoucher() {
+            const isOpen = voucher.classList.contains('open');
+            
+            // Close other vouchers first
+            vouchers.forEach(v => {
+              if (v !== voucher) {
+                v.classList.remove('open');
+                v.setAttribute('aria-expanded', 'false');
+              }
+            });
+            
+            if (!isOpen) {
+              voucher.classList.add('open');
+              voucher.setAttribute('aria-expanded', 'true');
+              
+              if (!voucher.classList.contains('opened')) {
+                voucher.classList.add('opened');
+                openedVouchers++;
+                updateProgress();
+                
+                // Delayed effects to improve performance
+                requestAnimationFrame(() => {
+                  triggerConfetti();
+                  triggerHearts(5);
+                  triggerSparkles();
+                });
+              }
+            } else {
+              voucher.classList.remove('open');
+              voucher.setAttribute('aria-expanded', 'false');
             }
           }
+          
+          voucher.addEventListener('click', toggleVoucher);
+          voucher.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleVoucher();
+            }
+          });
+        });
+      }
+
+      // Progress bar with ARIA support
+      function updateProgress() {
+        const percentage = (openedVouchers / 20) * 100;
+        progressFill.style.width = `${percentage}%`;
+        progressText.textContent = `${openedVouchers}/20 Gutscheine geöffnet`;
+        progressBar.setAttribute('aria-valuenow', openedVouchers);
+        
+        if (openedVouchers === 20) {
+          requestAnimationFrame(() => triggerConfetti());
+          // Use more accessible notification instead of alert
+          const notification = document.createElement('div');
+          notification.setAttribute('role', 'status');
+          notification.setAttribute('aria-live', 'polite');
+          notification.textContent = 'Alle Gutscheine geöffnet! Ich liebe dich! ❤️';
+          notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--primary-red); color: white; padding: 15px 25px; border-radius: 8px; z-index: 2000;';
+          document.body.appendChild(notification);
+          setTimeout(() => notification.remove(), 5000);
+        }
+      }
+
+      // Love letter functionality
+      function initLoveLetter() {
+        loveLetterButton.addEventListener('click', () => {
+          loveLetter.classList.remove('hidden');
+          overlay.classList.remove('hidden');
+          loveLetter.setAttribute('aria-hidden', 'false');
+          overlay.setAttribute('aria-hidden', 'false');
+          
+          // Focus management for modal
+          const closeButton = loveLetter.querySelector('button');
+          if (closeButton) closeButton.focus();
+          
+          requestAnimationFrame(() => {
+            triggerConfetti();
+            triggerHearts(10);
+          });
+        });
+        
+        // Close on overlay click
+        overlay.addEventListener('click', closeLoveLetter);
+        
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !loveLetter.classList.contains('hidden')) {
+            closeLoveLetter();
+          }
+        });
+      }
+
+      // Global close function for love letter
+      window.closeLoveLetter = function() {
+        loveLetter.classList.add('hidden');
+        overlay.classList.add('hidden');
+        loveLetter.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('aria-hidden', 'true');
+        
+        // Return focus to trigger button
+        loveLetterButton.focus();
+      };
+
+      // Random message functionality
+      function initRandomMessage() {
+        randomMessageButton.addEventListener('click', () => {
+          const message = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+          
+          // Create accessible notification instead of alert
+          const notification = document.createElement('div');
+          notification.setAttribute('role', 'status');
+          notification.setAttribute('aria-live', 'polite');
+          notification.textContent = message;
+          notification.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(139, 0, 0, 0.95); color: white; padding: 20px 30px; border-radius: 12px; z-index: 2000; max-width: 80%; text-align: center; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);';
+          document.body.appendChild(notification);
+          
+          setTimeout(() => notification.remove(), 4000);
+          requestAnimationFrame(() => triggerHearts(3));
+        });
+      }
+
+      // Love ticker functionality
+      function initLoveTicker() {
+        tickerText.textContent = loveMessages.join(' • ');
+        
+        // Restart animation periodically
+        setInterval(() => {
+          tickerText.style.animation = 'none';
+          requestAnimationFrame(() => {
+            tickerText.style.animation = 'ticker 20s linear infinite';
+          });
+        }, 20000);
+      }
+
+      // Background change functionality
+      function initBackgroundChanger() {
+        changeBackgroundButton.addEventListener('click', () => {
+          currentBackground = (currentBackground + 1) % backgrounds.length;
+          document.body.style.background = backgrounds[currentBackground];
+          requestAnimationFrame(() => triggerSparkles());
+        });
+      }
+
+      // Heart animation with performance optimization
+      function triggerHearts(count) {
+        const fragment = document.createDocumentFragment();
+        
+        for (let i = 0; i < count; i++) {
+          const heart = document.createElement('div');
+          heart.classList.add('heart');
+          heart.style.left = `${Math.random() * window.innerWidth}px`;
+          heart.style.top = `${window.innerHeight}px`;
+          fragment.appendChild(heart);
+          
+          // Remove heart after animation
+          setTimeout(() => heart.remove(), 2000);
+        }
+        
+        document.body.appendChild(fragment);
+      }
+
+      // Confetti with error handling
+      function triggerConfetti() {
+        if (typeof confetti !== 'undefined') {
+          confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#C0C0C0', '#8B0000', '#FFFFFF']
+          });
+        }
+      }
+
+      // Sparkle effect with performance optimization
+      function initSparkles() {
+        const sparkleCanvas = document.getElementById('sparkleCanvas');
+        const ctx = sparkleCanvas.getContext('2d');
+        const sparkles = [];
+        let animationId;
+        
+        function resizeCanvas() {
+          sparkleCanvas.width = window.innerWidth;
+          sparkleCanvas.height = window.innerHeight;
+        }
+        
+        function createSparkle() {
+          return {
+            x: Math.random() * sparkleCanvas.width,
+            y: Math.random() * sparkleCanvas.height,
+            size: Math.random() * 5 + 2,
+            speed: Math.random() * 2 + 1,
+            opacity: Math.random() * 0.5 + 0.5
+          };
+        }
+        
+        function animateSparkles() {
+          ctx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+          
+          sparkles.forEach((sparkle, index) => {
+            ctx.beginPath();
+            ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(192, 192, 192, ${sparkle.opacity})`;
+            ctx.fill();
+            
+            sparkle.y -= sparkle.speed;
+            sparkle.opacity -= 0.01;
+            
+            if (sparkle.opacity <= 0) {
+              sparkles.splice(index, 1);
+            }
+          });
+          
+          if (sparkles.length > 0) {
+            animationId = requestAnimationFrame(animateSparkles);
+          }
+        }
+        
+        window.triggerSparkles = function() {
+          for (let i = 0; i < 20; i++) {
+            sparkles.push(createSparkle());
+          }
+          if (!animationId) {
+            animateSparkles();
+          }
+        };
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+      }
+
+      // Polaroid click effects with accessibility
+      function initPolaroids() {
+        const polaroids = document.querySelectorAll('.polaroid');
+        polaroids.forEach(polaroid => {
+          function handlePolaroidInteraction() {
+            const isEven = Array.from(polaroids).indexOf(polaroid) % 2 === 1;
+            polaroid.style.transform = `rotate(${Math.random() * 4 - 2}deg) scale(1.1)`;
+            
+            setTimeout(() => {
+              polaroid.style.transform = isEven ? 'rotate(2deg)' : 'rotate(-2deg)';
+            }, 300);
+            
+            requestAnimationFrame(() => triggerHearts(3));
+          }
+          
+          polaroid.addEventListener('click', handlePolaroidInteraction);
+          polaroid.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handlePolaroidInteraction();
+            }
+          });
+        });
+      }
+
+      // Quiz functionality with better form handling
+      window.checkQuiz = function() {
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        const result = document.getElementById('quizResult');
+        let score = 0;
+        let message = '';
+
+        if (q1 && q1.value === 'b') { // Angenommen, "Im Park" ist korrekt
+          score++;
+        }
+        if (q2 && q2.value === 'c') { // Angenommen, "Pasta" ist korrekt
+          score++;
+        }
+
+        if (score === 2) {
+          message = 'Wow, du kennst mich so gut! Du bist mein perfekter Partner! ❤️';
+          requestAnimationFrame(() => {
+            triggerConfetti();
+            triggerHearts(5);
+          });
+        } else if (score === 1) {
+          message = 'Fast perfekt! Du machst mein Herz trotzdem schneller schlagen! 😊';
+          requestAnimationFrame(() => triggerHearts(3));
+        } else {
+          message = 'Kein Problem, wir lernen uns jeden Tag besser kennen! Ich liebe dich! 💕';
+          requestAnimationFrame(() => triggerHearts(3));
+        }
+
+        result.textContent = message;
+      };
+
+      // Puzzle functionality with improved accessibility and performance
+      function initPuzzle() {
+        const puzzleContainer = document.getElementById('puzzleContainer');
+        const puzzleBoard = document.getElementById('puzzleBoard');
+        const puzzleMessage = document.getElementById('puzzleMessage');
+        const resetPuzzleButton = document.getElementById('resetPuzzle');
+        const puzzleSize = window.innerWidth <= 768 ? 200 : 300;
+        const pieceSize = puzzleSize / 2;
+        let pieces = [];
+        let isDragging = false;
+        let currentPiece = null;
+        let dragOffset = { x: 0, y: 0 };
+
+        function createPuzzle() {
+          puzzleBoard.innerHTML = '';
+          pieces = [
+            { id: 0, correctPos: 0, currentPos: 0, x: 0, y: 0 },
+            { id: 1, correctPos: 1, currentPos: 1, x: pieceSize, y: 0 },
+            { id: 2, correctPos: 2, currentPos: 2, x: 0, y: pieceSize },
+            { id: 3, correctPos: 3, currentPos: 3, x: pieceSize, y: pieceSize }
+          ];
+          
+          // Shuffle pieces
+          for (let i = pieces.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [pieces[i].currentPos, pieces[j].currentPos] = [pieces[j].currentPos, pieces[i].currentPos];
+          }
+
+          pieces.forEach(piece => {
+            const div = document.createElement('div');
+            div.classList.add('puzzle-piece');
+            div.dataset.id = piece.id;
+            div.setAttribute('tabindex', '0');
+            div.setAttribute('role', 'button');
+            div.setAttribute('aria-label', `Puzzleteil ${piece.id + 1}`);
+            
+            const pos = pieces.find(p => p.currentPos === piece.id);
+            div.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="red"/><text x="150" y="150" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">Ich liebe dich</text></svg>')`;
+            div.style.backgroundPosition = `-${pos.x}px -${pos.y}px`;
+            div.style.left = `${piece.currentPos % 2 * pieceSize}px`;
+            div.style.top = `${Math.floor(piece.currentPos / 2) * pieceSize}px`;
+            puzzleBoard.appendChild(div);
+
+            // Event listeners for drag and drop
+            div.addEventListener('mousedown', startDrag);
+            div.addEventListener('touchstart', startTouch, { passive: false });
+            
+            // Keyboard support
+            div.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleKeyboardMove(piece);
+              }
+            });
+
+            // Mobile tap support
+            if (window.innerWidth <= 768) {
+              div.addEventListener('click', () => handleMobileMove(piece));
+            }
+          });
+          
+          puzzleMessage.textContent = 'Ziehe die Teile, um das Herz zu sehen!';
+        }
+
+        function startDrag(e) {
+          if (window.innerWidth > 768) {
+            isDragging = true;
+            currentPiece = e.target;
+            const rect = currentPiece.getBoundingClientRect();
+            const boardRect = puzzleBoard.getBoundingClientRect();
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+            currentPiece.style.zIndex = 10;
+            e.preventDefault();
+          }
+        }
+
+        function startTouch(e) {
+          if (window.innerWidth <= 768) return;
+          isDragging = true;
+          currentPiece = e.target;
+          const rect = currentPiece.getBoundingClientRect();
+          const touch = e.touches[0];
+          dragOffset.x = touch.clientX - rect.left;
+          dragOffset.y = touch.clientY - rect.top;
+          currentPiece.style.zIndex = 10;
+          e.preventDefault();
+        }
+
+        function handleMouseMove(e) {
+          if (isDragging && currentPiece) {
+            const rect = puzzleBoard.getBoundingClientRect();
+            const x = e.clientX - rect.left - dragOffset.x;
+            const y = e.clientY - rect.top - dragOffset.y;
+            currentPiece.style.left = `${Math.max(0, Math.min(x, puzzleSize - pieceSize))}px`;
+            currentPiece.style.top = `${Math.max(0, Math.min(y, puzzleSize - pieceSize))}px`;
+          }
+        }
+
+        function handleTouchMove(e) {
+          if (isDragging && currentPiece) {
+            const rect = puzzleBoard.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = touch.clientX - rect.left - dragOffset.x;
+            const y = touch.clientY - rect.top - dragOffset.y;
+            currentPiece.style.left = `${Math.max(0, Math.min(x, puzzleSize - pieceSize))}px`;
+            currentPiece.style.top = `${Math.max(0, Math.min(y, puzzleSize - pieceSize))}px`;
+            e.preventDefault();
+          }
+        }
+
+        function endDrag(e) {
+          if (isDragging && currentPiece) {
+            const rect = puzzleBoard.getBoundingClientRect();
+            const clientX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX);
+            const clientY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY);
+            
+            if (clientX && clientY) {
+              const x = clientX - rect.left;
+              const y = clientY - rect.top;
+              const targetPos = Math.floor(y / pieceSize) * 2 + Math.floor(x / pieceSize);
+              
+              if (targetPos >= 0 && targetPos < 4) {
+                const currentPieceData = pieces.find(p => p.id == currentPiece.dataset.id);
+                const targetPiece = pieces.find(p => p.currentPos === targetPos);
+                
+                if (targetPiece && currentPieceData) {
+                  [currentPieceData.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, currentPieceData.currentPos];
+                }
+              }
+            }
+            
+            currentPiece.style.zIndex = 0;
+            isDragging = false;
+            currentPiece = null;
+            updatePuzzleDisplay();
+          }
+        }
+
+        function handleKeyboardMove(piece) {
+          // Simple keyboard navigation - swap with adjacent empty space
+          const emptyPos = pieces.length - 1; // Assuming last position is empty
+          const emptyPiece = pieces.find(p => p.currentPos === emptyPos);
+          
+          if (emptyPiece && Math.abs(piece.currentPos - emptyPiece.currentPos) <= 2) {
+            [piece.currentPos, emptyPiece.currentPos] = [emptyPiece.currentPos, piece.currentPos];
+            updatePuzzleDisplay();
+          }
+        }
+
+        function handleMobileMove(piece) {
+          // For mobile: swap with adjacent pieces
+          const adjacentPositions = [
+            piece.currentPos - 1, piece.currentPos + 1,
+            piece.currentPos - 2, piece.currentPos + 2
+          ].filter(pos => pos >= 0 && pos < 4);
+          
+          if (adjacentPositions.length > 0) {
+            const targetPos = adjacentPositions[0];
+            const targetPiece = pieces.find(p => p.currentPos === targetPos);
+            if (targetPiece) {
+              [piece.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, piece.currentPos];
+              updatePuzzleDisplay();
+            }
+          }
+        }
+
+        function updatePuzzleDisplay() {
+          const piecesElements = document.querySelectorAll('.puzzle-piece');
+          piecesElements.forEach(pieceEl => {
+            const pieceData = pieces.find(p => p.id == pieceEl.dataset.id);
+            if (pieceData) {
+              pieceEl.style.left = `${pieceData.currentPos % 2 * pieceSize}px`;
+              pieceEl.style.top = `${Math.floor(pieceData.currentPos / 2) * pieceSize}px`;
+              pieceEl.style.transition = 'all 0.3s ease';
+            }
+          });
+          
+          setTimeout(() => {
+            piecesElements.forEach(piece => piece.style.transition = '');
+          }, 300);
+          
+          checkPuzzleCompletion();
+        }
+
+        function checkPuzzleCompletion() {
+          const isSolved = pieces.every(piece => piece.currentPos === piece.correctPos);
+          if (isSolved) {
+            puzzleMessage.textContent = 'Ich liebe dich für immer! ❤️';
+            requestAnimationFrame(() => {
+              triggerConfetti();
+              triggerHearts(10);
+            });
+          } else {
+            puzzleMessage.textContent = 'Setze das Herz zusammen, um die Nachricht zu sehen!';
+          }
+        }
+
+        // Event listeners
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+
+        resetPuzzleButton.addEventListener('click', createPuzzle);
+        
+        // Initialize puzzle
+        createPuzzle();
+      }
+
+      // Performance optimization: Use Intersection Observer for animations
+      function initIntersectionObserver() {
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+              }
+            });
+          }, { threshold: 0.1 });
+
+          // Observe sections for animations
+          sections.forEach(section => observer.observe(section));
+        }
+      }
+
+      // Initialize all functionality
+      function init() {
+        initNavigation();
+        initVouchers();
+        initLoveLetter();
+        initRandomMessage();
+        initLoveTicker();
+        initBackgroundChanger();
+        initSparkles();
+        initPolaroids();
+        initPuzzle();
+        initIntersectionObserver();
+        
+        // Performance: Preload images in viewport
+        if ('loading' in HTMLImageElement.prototype) {
+          const images = document.querySelectorAll('img[data-src]');
+          images.forEach(img => {
+            img.src = img.dataset.src;
+          });
+        }
+      }
+
+      // Error handling
+      window.addEventListener('error', (e) => {
+        console.error('JavaScript error:', e.error);
+        // Graceful degradation - continue functionality
+      });
+
+      // Initialize everything
+      init();
+    });
+
+    // Service Worker registration for offline functionality (optional)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+          // Silently fail if no service worker available
         });
       });
-      puzzleMessage.textContent = 'Ziehe die Teile, um das Herz zu sehen!';
     }
-
-    function startDrag(e) {
-      if (window.innerWidth > 768) {
-        isDragging = true;
-        currentPiece = e.target;
-        e.target.style.zIndex = 10;
-      }
-    }
-
-    function startTouch(e) {
-      if (window.innerWidth <= 768) return;
-      isDragging = true;
-      currentPiece = e.target;
-      e.target.style.zIndex = 10;
-    }
-
-    document.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        const rect = puzzleBoard.getBoundingClientRect();
-        const x = e.clientX - rect.left - pieceSize / 2;
-        const y = e.clientY - rect.top - pieceSize / 2;
-        currentPiece.style.left = `${x}px`;
-        currentPiece.style.top = `${y}px`;
-      }
-    });
-
-    document.addEventListener('touchmove', (e) => {
-      if (isDragging) {
-        const rect = puzzleBoard.getBoundingClientRect();
-        const touch = e.touches[0];
-        const x = touch.clientX - rect.left - pieceSize / 2;
-        const y = touch.clientY - rect.top - pieceSize / 2;
-        currentPiece.style.left = `${x}px`;
-        currentPiece.style.top = `${y}px`;
-      }
-    });
-
-    document.addEventListener('mouseup', (e) => {
-      if (isDragging) {
-        isDragging = false;
-        const rect = puzzleBoard.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const targetPos = Math.floor(y / pieceSize) * 2 + Math.floor(x / pieceSize);
-        const currentPieceData = pieces.find(p => p.id == currentPiece.dataset.id);
-        const targetPiece = pieces.find(p => p.currentPos === targetPos);
-        if (targetPiece) {
-          [currentPieceData.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, currentPieceData.currentPos];
-        }
-        currentPiece.style.zIndex = 0;
-        updatePuzzle();
-      }
-    });
-
-    document.addEventListener('touchend', (e) => {
-      if (isDragging) {
-        isDragging = false;
-        const rect = puzzleBoard.getBoundingClientRect();
-        const touch = e.changedTouches[0];
-        const x = touch.clientX - rect.left;
-        const y = touch.clientY - rect.top;
-        const targetPos = Math.floor(y / pieceSize) * 2 + Math.floor(x / pieceSize);
-        const currentPieceData = pieces.find(p => p.id == currentPiece.dataset.id);
-        const targetPiece = pieces.find(p => p.currentPos === targetPos);
-        if (targetPiece) {
-          [currentPieceData.currentPos, targetPiece.currentPos] = [targetPiece.currentPos, currentPieceData.currentPos];
-        }
-        currentPiece.style.zIndex = 0;
-        updatePuzzle();
-      }
-    });
-
-    function updatePuzzle() {
-      const piecesElements = document.querySelectorAll('.puzzle-piece');
-      piecesElements.forEach(piece => {
-        const pieceData = pieces.find(p => p.id == piece.dataset.id);
-        piece.style.left = `${pieceData.currentPos % 2 * pieceSize}px`;
-        piece.style.top = `${Math.floor(pieceData.currentPos / 2) * pieceSize}px`;
-        piece.style.transition = 'all 0.3s ease';
-      });
-      setTimeout(() => {
-        piecesElements.forEach(piece => piece.style.transition = '');
-      }, 300);
-      checkPuzzle();
-    }
-
-    function checkPuzzle() {
-      const isSolved = pieces.every(piece => piece.currentPos === piece.correctPos);
-      if (isSolved) {
-        puzzleMessage.textContent = 'Ich liebe dich für immer! ❤️';
-        triggerConfetti();
-        triggerHearts(10);
-      } else {
-        puzzleMessage.textContent = 'Setze das Herz zusammen, um die Nachricht zu sehen!';
-      }
-    }
-
-    resetPuzzleButton.addEventListener('click', initPuzzle);
-
-    initPuzzle();
   </script>
 </body>
 </html>
